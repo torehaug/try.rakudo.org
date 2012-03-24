@@ -1,0 +1,42 @@
+# CPAN dependencies:
+
+- Web Server:
+    * Mojolicious
+    * IO::Socket
+- REPL Server:
+    * POE
+    * IO::Pty::HalfDuplex
+    * Time::HiRes
+    * Date::Format
+
+# Backend:
+
+First of all, go to the `backend` directory and try running:
+
+    perl persist.pl
+
+If the program just sits there doing apparently nothing (and listening on port
+11211), then it's working. If it spits out an error then you probably need a
+backend.conf file to tell it where your perl6 binary and p6safe.pl are. This
+should be a single line of the form:
+
+   /path/to/perl6 /path/to/p6safe.pl
+
+All the other code in the backend uses relative file paths, so you'll likely
+want to start the backend from inside there in order for anything to work.
+
+If the backend refuses to start and complains it's already running when it
+clearly isn't, delete the `persist.pid` file.
+
+# Frontend:
+
+The web server can be run standalone by going to the `frontend` directory and
+running:
+
+   perl try-rakudo.pl daemon
+
+This will run a basic web server on localhost:3000. For more details on
+configuring the web server please refer to the Mojolicious documentation.
+There's an example Apache config file in the `doc` directory.
+
+<!-- vim: set filetype=markdown textwidth=80: -->

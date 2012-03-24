@@ -1,6 +1,9 @@
-my $*ARGFILES = open '../frontend/data/input_text.txt'; 
+#!/usr/bin/env perl6
+use v6;
+my $backend_dir = '.';
+my $*ARGFILES = open "$backend_dir/data/input_text.txt";
 
-module Safe { 
+module Safe {
     our sub forbidden(*@a, *%h) { die "Operation not permitted in safe mode" };
     Q:PIR {
         $P0 = get_hll_namespace
